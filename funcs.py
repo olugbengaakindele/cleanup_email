@@ -11,22 +11,22 @@ def deleteEmail():
         print(em)
         if "akin" in em.lower() :
             mypassword = os.environ['GMAILPASS2']
-            folder_to_clean = "inbox"
+            folder_to_clean = 'Inbox'
         else:
             mypassword = os.environ['GMAILPASS']
-            folder_to_clean = "inbox"
+            folder_to_clean = 'Inbox'
 
         
             # Login to your email account
             mail = imaplib.IMAP4_SSL('imap.gmail.com')
             mail.login(em, mypassword)
-
+           
             # Select the mailbox you want to delete emails from
             mail.select(f'"{folder_to_clean}"')
 
             for ems in os.environ["EMIALS_TO_DELETE"].split(","):
                 ems = ems.strip()   
-                print(ems)
+               
                 # Search for emails from a specific sender
                 typ, data = mail.search(None, 'FROM', f'"{ems}"')
                 try:
